@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="mp_color_primary">#FFBD59</color>
+    <color name="mp_color_primary_variant">#F1AB41</color>
+    <color name="mp_color_primary_dark">#FFA824</color>
+    <color name="mp_color_secondary">#FF66C4</color>
+    <color name="mp_color_secondary_variant">#FF4AB9</color>
+    <color name="mp_color_error">#B00020</color>
+    <color name="toolbar_background">#E0E0E0</color>
+    <color name="ic_launcher_background">#FF66C4</color>
+    <color name="bottom_sheet_background">#FFA1DB</color>
+    <color name="bottom_sheet_text_color">@android:color/black</color>
+    <color name="icActive">#FFFFFFFF</color>
+    <color name="icFocused">#DDFFFFFF</color>
+    <color name="icPressed">#AAFFFFFF</color>
+</resources>

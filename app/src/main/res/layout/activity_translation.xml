@@ -1,0 +1,31 @@
+<!-- activity_buttons.xml -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center"
+    android:padding="16dp">
+
+    <Button
+        android:id="@+id/translateButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Translate"
+        android:textSize="18sp"
+
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:layout_marginEnd="16dp"/>
+
+    <Button
+        android:id="@+id/dictionaryButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ASL Dictionary"
+        android:textSize="18sp"
+
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"/>
+
+</LinearLayout>

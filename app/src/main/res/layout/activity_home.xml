@@ -1,0 +1,79 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp"
+    android:background="@drawable/signalink_bg">
+
+    <!-- Image at the top center -->
+    <ImageView
+        android:id="@+id/topCenterImage"
+        android:layout_width="292dp"
+        android:layout_height="274dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/signalink_logo" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@id/topCenterImage"
+        android:gravity="center">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <ImageButton
+                android:id="@+id/translateButton"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:padding="8dp"
+                android:src="@drawable/palm"
+                android:scaleType="fitCenter"
+                android:background="@drawable/rounded_button_background"/>
+
+            <TextView
+                android:id="@+id/translateLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Translate"
+                android:textColor="@color/bottom_sheet_text_color"
+                android:textSize="18sp"/>
+        </LinearLayout>
+
+        <!-- Add spacing between buttons -->
+        <Space
+            android:layout_width="24dp"
+            android:layout_height="match_parent"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <ImageButton
+                android:id="@+id/dictionaryButton"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:padding="8dp"
+                android:src="@drawable/dictionary"
+                android:scaleType="fitCenter"
+                android:background="@drawable/rounded_button_background"/>
+
+            <TextView
+                android:id="@+id/dictionaryLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ASL Dictionary"
+                android:textColor="@color/bottom_sheet_text_color"
+                android:textSize="18sp"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>
