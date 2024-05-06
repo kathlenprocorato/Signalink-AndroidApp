@@ -22,4 +22,15 @@
         android:textSize="@dimen/bottom_sheet_text_size"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/myTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:textColor="@android:color/black"
+        android:layout_centerInParent="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
 </androidx.constraintlayout.widget.ConstraintLayout>

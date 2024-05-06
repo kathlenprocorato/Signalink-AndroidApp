@@ -62,6 +62,7 @@ class GestureRecognizerResultsAdapter :
         fun bind(label: String?, score: Float?) {
             with(binding) {
                 tvLabel.text = label ?: NO_VALUE
+                myTextView.setText(myTextView.text.toString() + tvLabel.text)
                 tvScore.text = if (score != null) String.format(
                     Locale.US,
                     "%.2f",
