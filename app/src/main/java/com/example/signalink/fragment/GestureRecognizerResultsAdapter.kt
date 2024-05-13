@@ -18,6 +18,10 @@ class GestureRecognizerResultsAdapter :
     private var adapterCategories: MutableList<Category?> = mutableListOf()
     private var adapterSize: Int = 0
 
+    //test
+    val words = mutableListOf<String?>()
+    var sentence = ""
+
     @SuppressLint("NotifyDataSetChanged")
     fun updateResults(categories: List<Category>?) {
         adapterCategories = MutableList(adapterSize) { null }
@@ -61,12 +65,29 @@ class GestureRecognizerResultsAdapter :
 
         fun bind(label: String?, score: Float?) {
             with(binding) {
-                tvLabel.text = label ?: NO_VALUE
+                if(label == null && words.isNullOrEmpty()){
+                    tvLabel.text = ""
+                }
+                //tvLabel.text = label ?: NO_VALUE
                 tvScore.text = if (score != null) String.format(
                     Locale.US,
                     "%.2f",
                     score
-                ) else NO_VALUE
+                ) else ""
+
+                if(words.isNullOrEmpty()){
+                    words.add("")
+                }
+
+                if((words.last() != label && label != null && tvScore.text.toString().toDouble() > 0.90)){
+                    words.add(label)
+                    if(label.equals("space")){
+                        sentence = sentence + " "
+                    } else{
+                        sentence = sentence + label
+                    }
+                }
+                tvLabel.setText(sentence)
             }
         }
     }

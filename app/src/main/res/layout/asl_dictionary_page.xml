@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="28dp"
+    android:background="@drawable/signalink_bg">
+
+    <!-- Image at the top center -->
+    <ImageView
+        android:id="@+id/topCenterImage"
+        android:layout_width="458dp"
+        android:layout_height="454dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/signalink_logo" />
+
+
+    <Button
+        android:id="@+id/buttonLetter"
+        android:layout_width="247dp"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:padding="30dp"
+        android:text="Letters" />
+
+    <Button
+        android:id="@+id/buttonPhrase"
+        android:layout_width="247dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/buttonLetter"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="16dp"
+        android:padding="30dp"
+        android:text="Simple Phrases" />
+
+</RelativeLayout>

@@ -16,5 +16,11 @@ class HomeActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        val dictionaryButton = findViewById<ImageButton>(R.id.dictionaryButton)
+        dictionaryButton.setOnClickListener {
+            val intent = Intent(this, ASLDictionaryActivity::class.java)
+            startActivity(intent)
+        }
+
     }
 }

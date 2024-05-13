@@ -21,6 +21,8 @@
         <activity android:name=".HomeActivity"
             android:label="Menu"/>
         <activity android:name=".TranslateActivity" />
+        <activity android:name=".ASLDictionaryActivity" />
+
         <activity
             android:name=".MainActivity"
             android:exported="true" >
