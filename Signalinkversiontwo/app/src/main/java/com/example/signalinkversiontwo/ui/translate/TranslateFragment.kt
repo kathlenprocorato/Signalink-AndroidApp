@@ -42,7 +42,7 @@ class TranslateFragment : Fragment(),
     private val viewModel: TranslateViewModel by activityViewModels()
     private var defaultNumResults = 1
     private val gestureRecognizerResultAdapter: GestureRecognizerResultsAdapter by lazy {
-        GestureRecognizerResultsAdapter().apply {
+        GestureRecognizerResultsAdapter(requireContext()).apply {
             updateAdapterSize(defaultNumResults)
         }
     }

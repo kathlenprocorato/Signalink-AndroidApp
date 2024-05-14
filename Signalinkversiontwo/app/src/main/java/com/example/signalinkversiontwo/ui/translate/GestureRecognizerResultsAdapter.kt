@@ -1,6 +1,9 @@
 package com.example.signalinkversiontwo.ui.translate
 
 import android.annotation.SuppressLint
+import android.content.Context
+import android.speech.tts.TextToSpeech
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -9,8 +12,28 @@ import com.google.mediapipe.tasks.components.containers.Category
 import java.util.Locale
 import kotlin.math.min
 
-class GestureRecognizerResultsAdapter :
-    RecyclerView.Adapter<GestureRecognizerResultsAdapter.ViewHolder>() {
+class GestureRecognizerResultsAdapter(private val context: Context) :
+    RecyclerView.Adapter<GestureRecognizerResultsAdapter.ViewHolder>(), TextToSpeech.OnInitListener {
+
+    private var tts: TextToSpeech? = null
+
+    init {
+        tts = TextToSpeech(context, this)
+    }
+
+    override fun onInit(status: Int) {
+        if (status == TextToSpeech.SUCCESS) {
+            val language = tts?.setLanguage(Locale.ENGLISH)
+            if (language == TextToSpeech.LANG_MISSING_DATA || language == TextToSpeech.LANG_NOT_SUPPORTED) {
+                Log.e("TTS", "The Language specified is not supported!")
+            } else {
+                Log.i("TTS", "TextToSpeech Initialized Successfully!")
+            }
+        } else {
+            Log.e("TTS", "Initialization Failed!")
+        }
+    }
+
     companion object {
         private const val NO_VALUE = "No hands detected."
     }
@@ -18,9 +41,8 @@ class GestureRecognizerResultsAdapter :
     private var adapterCategories: MutableList<Category?> = mutableListOf()
     private var adapterSize: Int = 0
 
-    val words = mutableListOf<String?>()
-    var sentence = ""
-
+    private val words = mutableListOf<String?>()
+    private var sentence = ""
 
     @SuppressLint("NotifyDataSetChanged")
     fun updateResults(categories: List<Category>?) {
@@ -53,8 +75,8 @@ class GestureRecognizerResultsAdapter :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        adapterCategories[position].let { category ->
-            holder.bind(category?.categoryName(), category?.score())
+        adapterCategories[position]?.let { category ->
+            holder.bind(category.categoryName(), category.score())
         }
     }
 
@@ -65,29 +87,29 @@ class GestureRecognizerResultsAdapter :
 
         fun bind(label: String?, score: Float?) {
             with(binding) {
-                if(label == null && words.isNullOrEmpty()){
+                if (label == null && words.isNullOrEmpty()) {
                     tvLabel.text = ""
                 }
-                //tvLabel.text = label ?: NO_VALUE
-                tvScore.text = if (score != null) String.format(
-                    Locale.US,
-                    "%.2f",
-                    score
-                ) else ""
+                tvScore.text = score?.let { String.format(Locale.US, "%.2f", it) } ?: ""
 
-                if(words.isNullOrEmpty()){
+                if (words.isNullOrEmpty()) {
                     words.add("")
                 }
 
-                if((words.last() != label && label != null && tvScore.text.toString().toDouble() >= 0.90)){
+                if ((words.last() != label && label != null && tvScore.text.toString().toDouble() >= 0.90)) {
                     words.add(label)
-                    if(label.equals("Space")){
-                        sentence = sentence + " "
-                    } else{
-                        sentence = sentence + label
+                    sentence += if (label.equals("Space", true)) {
+                        " "
+                    } else {
+                        label
                     }
                 }
-                tvLabel.setText(sentence)
+                tvLabel.text = sentence
+
+                //subject to change cause it looops
+                if (tts != null && !tts!!.isSpeaking) {
+                    tts?.speak(sentence, TextToSpeech.QUEUE_FLUSH, null, null)
+                }
             }
         }
     }

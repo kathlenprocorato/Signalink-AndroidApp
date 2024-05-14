@@ -79,4 +79,7 @@ dependencies {
 
     // Mediapipe Library
     implementation("com.google.mediapipe:tasks-vision:0.10.0")
+
+    //tts
+    implementation ("androidx.core:core-ktx:1.6.0")
 }
