@@ -98,10 +98,16 @@ class GestureRecognizerResultsAdapter(private val context: Context) :
 
                 if ((words.last() != label && label != null && tvScore.text.toString().toDouble() >= 0.90)) {
                     words.add(label)
-                    sentence += if (label.equals("Space", true)) {
-                        " "
-                    } else {
-                        label
+                    if (label.equals("Space", true)) {
+                        sentence += " "
+                    } else if (label.equals("Delete", ignoreCase = true)){
+                        if (sentence.isNotEmpty()) {
+                            sentence = sentence.dropLast(1) // Remove the last character or word
+                        } else {
+                            return;
+                        }
+                    }else {
+                        sentence += label
                     }
                 }
                 tvLabel.text = sentence

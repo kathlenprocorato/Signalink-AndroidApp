@@ -1,12 +1,16 @@
 package com.example.signalinkversiontwo.ui.learn
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.example.signalinkversiontwo.LettersActivity
+import com.example.signalinkversiontwo.SimplePhrasesActivity
 import com.example.signalinkversiontwo.databinding.FragmentLearnBinding
 
 class LearnFragment : Fragment() {
@@ -28,10 +32,22 @@ class LearnFragment : Fragment() {
         _binding = FragmentLearnBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textLearn
-        learnViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
+        // Get references to the LinearLayouts
+        val lettersButton: LinearLayout = binding.lettersButton
+        val simplePhrasesButton: LinearLayout = binding.simplePhrasesButton
+
+        // Set OnClickListener for the Letters Button
+        lettersButton.setOnClickListener {
+            // Start LettersActivity
+            startActivity(Intent(requireContext(), LettersActivity::class.java))
         }
+
+        // Set OnClickListener for the Simple Phrases Button
+        simplePhrasesButton.setOnClickListener {
+            // Start SimplePhrasesActivity
+            startActivity(Intent(requireContext(), SimplePhrasesActivity::class.java))
+        }
+
         return root
     }
 
