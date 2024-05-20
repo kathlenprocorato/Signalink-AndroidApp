@@ -1,5 +1,6 @@
 package com.example.signalinkversiontwo.ui.learn
 
+<<<<<<< HEAD
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -198,3 +199,20 @@ class QuizFragment : Fragment(), GestureRecognizerHelper.GestureRecognizerListen
         backgroundExecutor.shutdown()
     }
 }
+=======
+import androidx.fragment.app.Fragment
+import com.example.signalinkversiontwo.GestureRecognizerHelper
+
+class QuizFragment : Fragment(),
+    GestureRecognizerHelper.GestureRecognizerListener {
+
+
+    override fun onError(error: String, errorCode: Int) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onResults(resultBundle: GestureRecognizerHelper.ResultBundle) {
+        TODO("Not yet implemented")
+    }
+}
+>>>>>>> 2243e2e1d5060d319043e4890a120f5a7aa7475a

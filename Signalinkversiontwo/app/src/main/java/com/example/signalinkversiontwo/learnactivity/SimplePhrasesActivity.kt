@@ -1,5 +1,6 @@
 package com.example.signalinkversiontwo.learnactivity
 
+<<<<<<< HEAD
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
@@ -50,3 +51,9 @@ class SimplePhrasesActivity : AppCompatActivity(), View.OnClickListener {
         fragment.show(supportFragmentManager, "VideoModalFragment")
     }
 }
+=======
+import androidx.appcompat.app.AppCompatActivity
+
+class SimplePhrasesActivity : AppCompatActivity() {
+}
+>>>>>>> 2243e2e1d5060d319043e4890a120f5a7aa7475a

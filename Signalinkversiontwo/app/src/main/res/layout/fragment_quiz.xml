@@ -59,8 +59,7 @@
             android:layout_height="wrap_content"
             android:background="@android:color/white"
             android:hint="Your answer"
-            android:padding="20dp"
-            android:textColor="@android:color/black" />
+            android:padding="20dp" />
 
     </LinearLayout>
 
