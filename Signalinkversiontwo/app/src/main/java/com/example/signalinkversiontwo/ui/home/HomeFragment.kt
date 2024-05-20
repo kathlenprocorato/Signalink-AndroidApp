@@ -10,7 +10,6 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.example.signalinkversiontwo.LettersActivity
 import com.example.signalinkversiontwo.R
 import com.example.signalinkversiontwo.databinding.FragmentHomeBinding
 
@@ -76,13 +75,6 @@ class HomeFragment : Fragment() {
         val textTakeQuiz: TextView = binding.takeQuizzesText
         homeViewModel.takeQuiz.observe(viewLifecycleOwner) {
             textTakeQuiz.text = it
-        }
-
-        val lettersButton: LinearLayout = binding.learnLetters
-
-        lettersButton.setOnClickListener {
-            // Start LettersActivity
-            startActivity(Intent(requireContext(), LettersActivity::class.java))
         }
 
         return root
