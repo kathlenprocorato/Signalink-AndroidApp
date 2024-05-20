@@ -209,7 +209,7 @@ class PhrasesRecognizerHelper(
 
     companion object {
         val TAG = "GestureRecognizerHelper ${this.hashCode()}"
-        private const val MP_RECOGNIZER_TASK = "all_phrases.task"
+        private const val MP_RECOGNIZER_TASK = "final_data.task"
 
         const val DELEGATE_CPU = 0
         const val DELEGATE_GPU = 1

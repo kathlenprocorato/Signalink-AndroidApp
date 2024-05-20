@@ -12,6 +12,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.signalinkversiontwo.R
 import com.example.signalinkversiontwo.databinding.FragmentHomeBinding
+import com.example.signalinkversiontwo.learnactivity.LettersActivity
+import com.example.signalinkversiontwo.learnactivity.QuizActivity
 
 class HomeFragment : Fragment() {
 
@@ -39,6 +41,18 @@ class HomeFragment : Fragment() {
 
         binding.phraseToText.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_permissionsFragment_to_phrases)
+        }
+        val lettersButton: LinearLayout = binding.learnLetters
+        val quizButton: LinearLayout = binding.takeQuizzes
+
+        lettersButton.setOnClickListener {
+            // Start LettersActivity
+            startActivity(Intent(requireContext(), LettersActivity::class.java))
+        }
+
+        quizButton.setOnClickListener {
+            // Start QuizActivity
+            startActivity(Intent(requireContext(), QuizActivity::class.java))
         }
 
         val textView: TextView = binding.textWelcome

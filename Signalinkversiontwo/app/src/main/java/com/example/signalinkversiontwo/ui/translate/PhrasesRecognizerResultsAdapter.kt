@@ -95,7 +95,7 @@ class PhrasesRecognizerResultsAdapter(private val context: Context) :
                     words.add("")
                 }
 
-                if ((words.last() != label && label != null && score.toString().toDouble() >= 0.70)) {
+                if ((words.last() != label && label != null && score.toString().toDouble() >= 0.80)) {
                     if (label.equals("Delete", ignoreCase = true)){
                         words.removeLast()
                     } else {
