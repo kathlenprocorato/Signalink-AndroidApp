@@ -28,7 +28,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LettersActivity"/>
+        <activity android:name=".learnactivity.LettersActivity"/>
+        <activity android:name=".learnactivity.SimplePhrasesActivity"/>
+        <activity android:name=".learnactivity.QuizActivity"/>
     </application>
 
 </manifest>
