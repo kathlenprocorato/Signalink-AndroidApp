@@ -88,15 +88,14 @@ class GestureRecognizerResultsAdapter(private val context: Context) :
         fun bind(label: String?, score: Float?) {
             with(binding) {
                 if (label == null && words.isNullOrEmpty()) {
-                    tvLabel.text = ""
+                    tvLabel.text = NO_VALUE
                 }
-                tvScore.text = score?.let { String.format(Locale.US, "%.2f", it) } ?: ""
 
-                if (words.isNullOrEmpty()) {
+                if(words.isNullOrEmpty()){
                     words.add("")
                 }
 
-                if ((words.last() != label && label != null && tvScore.text.toString().toDouble() >= 0.90)) {
+                if ((words.last() != label && label != null && score.toString().toDouble() >= 0.90)) {
                     words.add(label)
                     if (label.equals("Space", true)) {
                         sentence += " "
@@ -106,10 +105,11 @@ class GestureRecognizerResultsAdapter(private val context: Context) :
                         } else {
                             return;
                         }
-                    }else {
+                    } else {
                         sentence += label
                     }
                 }
+
                 tvLabel.text = sentence
 
                 //subject to change cause it looops
