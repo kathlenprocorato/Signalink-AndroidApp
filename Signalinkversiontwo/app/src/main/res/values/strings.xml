@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Signalink</string>
+    <string name="title_home">Home</string>
+    <string name="title_translate">Translate</string>
+    <string name="title_learn">Learn</string>
+    <string name="title_about">About</string>
+</resources>

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.learn.LearnFragment"
+    tools:layout_editor_absoluteX="0dp"
+    tools:layout_editor_absoluteY="-49dp">
+
+    <!-- Letters Button -->
+    <LinearLayout
+        android:id="@+id/letters_button"
+        android:layout_width="164dp"
+        android:layout_height="140dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/border_background"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/simple_phrases_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.328">
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:contentDescription="Letters"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_letters"
+            tools:layout_editor_absoluteX="63dp"
+            tools:layout_editor_absoluteY="199dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Letters"
+            android:textSize="20sp"
+            tools:layout_editor_absoluteX="82dp"
+            tools:layout_editor_absoluteY="307dp" />
+    </LinearLayout>
+
+    <!-- Simple Phrases Button -->
+    <LinearLayout
+        android:id="@+id/simple_phrases_button"
+        android:layout_width="163dp"
+        android:layout_height="140dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/border_background"
+        android:color="@color/blue_200"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/letters_button"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.328">
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:contentDescription="Simple Phrases"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_simple_phrase"
+            tools:layout_editor_absoluteX="249dp"
+            tools:layout_editor_absoluteY="199dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Simple Phrases"
+            android:textSize="20sp"
+            tools:layout_editor_absoluteX="230dp"
+            tools:layout_editor_absoluteY="307dp" />
+    </LinearLayout>
+
+    <!-- Take Quiz Button -->
+    <LinearLayout
+        android:id="@+id/take_quiz_button"
+        android:layout_width="164dp"
+        android:layout_height="140dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/border_background"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.42"
+        app:layout_constraintStart_toStartOf="@id/letters_button"
+        app:layout_constraintTop_toBottomOf="@id/letters_button"
+        app:layout_constraintVertical_bias="0.199">
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:contentDescription="Take Quiz"
+            android:scaleType="centerCrop"
+            android:src="@drawable/quiz"
+            tools:layout_editor_absoluteX="155dp"
+            tools:layout_editor_absoluteY="388dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Take Quiz!"
+            android:textSize="20sp"
+            tools:layout_editor_absoluteX="158dp"
+            tools:layout_editor_absoluteY="496dp" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
