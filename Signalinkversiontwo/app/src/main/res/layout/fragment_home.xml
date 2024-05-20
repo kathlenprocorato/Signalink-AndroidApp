@@ -97,7 +97,7 @@
                             android:layout_height="100dp"
                             android:layout_gravity="center"
                             android:scaleType="centerCrop"
-                            android:src="@drawable/ic_letters"
+                            android:src="@drawable/translateletters"
                             tools:layout_editor_absoluteX="63dp"
                             tools:layout_editor_absoluteY="199dp" />
 
@@ -125,7 +125,7 @@
                             android:layout_height="100dp"
                             android:layout_gravity="center"
                             android:scaleType="centerCrop"
-                            android:src="@drawable/ic_letters"
+                            android:src="@drawable/translatephrases"
                             tools:layout_editor_absoluteX="63dp"
                             tools:layout_editor_absoluteY="199dp" />
 
