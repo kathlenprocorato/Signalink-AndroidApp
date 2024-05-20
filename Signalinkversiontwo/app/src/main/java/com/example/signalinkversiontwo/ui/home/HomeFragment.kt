@@ -37,6 +37,10 @@ class HomeFragment : Fragment() {
             findNavController().navigate(R.id.action_homeFragment_to_permissionsFragment)
         }
 
+        binding.phraseToText.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_permissionsFragment_to_phrases)
+        }
+
         val textView: TextView = binding.textWelcome
         homeViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
