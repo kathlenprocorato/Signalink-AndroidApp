@@ -6,11 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.signalinkversiontwo.LettersActivity
-import com.example.signalinkversiontwo.SimplePhrasesActivity
+import com.example.signalinkversiontwo.learnactivity.LettersActivity
+import com.example.signalinkversiontwo.learnactivity.QuizActivity
+import com.example.signalinkversiontwo.learnactivity.SimplePhrasesActivity
 import com.example.signalinkversiontwo.databinding.FragmentLearnBinding
 
 class LearnFragment : Fragment() {
@@ -35,6 +35,7 @@ class LearnFragment : Fragment() {
         // Get references to the LinearLayouts
         val lettersButton: LinearLayout = binding.lettersButton
         val simplePhrasesButton: LinearLayout = binding.simplePhrasesButton
+        val quizButton: LinearLayout = binding.takeQuizButton
 
         // Set OnClickListener for the Letters Button
         lettersButton.setOnClickListener {
@@ -46,6 +47,12 @@ class LearnFragment : Fragment() {
         simplePhrasesButton.setOnClickListener {
             // Start SimplePhrasesActivity
             startActivity(Intent(requireContext(), SimplePhrasesActivity::class.java))
+        }
+
+        // Set OnClickListener for the Quiz Button
+        quizButton.setOnClickListener {
+            // Start QuizActivity
+            startActivity(Intent(requireContext(), QuizActivity::class.java))
         }
 
         return root

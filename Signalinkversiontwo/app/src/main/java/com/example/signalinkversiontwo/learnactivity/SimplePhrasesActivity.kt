@@ -1,4 +1,4 @@
-package com.example.signalinkversiontwo
+package com.example.signalinkversiontwo.learnactivity
 
 import androidx.appcompat.app.AppCompatActivity
 

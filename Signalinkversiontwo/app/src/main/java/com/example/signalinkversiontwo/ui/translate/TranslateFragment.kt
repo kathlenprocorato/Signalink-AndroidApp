@@ -7,7 +7,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
 import android.widget.Toast
 import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
@@ -21,22 +20,18 @@ import com.example.signalinkversiontwo.ui.translate.TranslateViewModel
 import com.example.signalinkversiontwo.R
 import com.example.signalinkversiontwo.databinding.FragmentTranslateBinding
 import com.google.mediapipe.tasks.vision.core.RunningMode
-import java.util.*
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
 
-class TranslateFragment : Fragment(),
-    GestureRecognizerHelper.GestureRecognizerListener {
+class TranslateFragment : Fragment(), GestureRecognizerHelper.GestureRecognizerListener {
 
     companion object {
         private const val TAG = "Hand gesture recognizer"
     }
 
     private var _fragmentTranslateBinding: FragmentTranslateBinding? = null
-
-    private val fragmentTranslateBinding
-        get() = _fragmentTranslateBinding!!
+    private val fragmentTranslateBinding get() = _fragmentTranslateBinding!!
 
     private lateinit var gestureRecognizerHelper: GestureRecognizerHelper
     private val viewModel: TranslateViewModel by activityViewModels()
@@ -93,19 +88,14 @@ class TranslateFragment : Fragment(),
 
         // Shut down our background executor
         backgroundExecutor.shutdown()
-        backgroundExecutor.awaitTermination(
-            Long.MAX_VALUE, TimeUnit.NANOSECONDS
-        )
+        backgroundExecutor.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS)
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
+        inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _fragmentTranslateBinding =
-            FragmentTranslateBinding.inflate(inflater, container, false)
-
+        _fragmentTranslateBinding = FragmentTranslateBinding.inflate(inflater, container, false)
         return fragmentTranslateBinding.root
     }
 
@@ -124,10 +114,13 @@ class TranslateFragment : Fragment(),
         fragmentTranslateBinding.viewFinder.post {
             // Set up the camera and its use cases
             setUpCamera()
+
+            fragmentTranslateBinding.btnToggleCamera.setOnClickListener {
+                toggleCamera()
+            }
         }
 
-        // Create the Hand Gesture Recognition Helper that will handle the
-        // inference
+        // Create the Hand Gesture Recognition Helper that will handle the inference
         backgroundExecutor.execute {
             gestureRecognizerHelper = GestureRecognizerHelper(
                 context = requireContext(),
@@ -141,11 +134,9 @@ class TranslateFragment : Fragment(),
         }
     }
 
-
     // Initialize CameraX, and prepare to bind the camera use cases
     private fun setUpCamera() {
-        val cameraProviderFuture =
-            ProcessCameraProvider.getInstance(requireContext())
+        val cameraProviderFuture = ProcessCameraProvider.getInstance(requireContext())
         cameraProviderFuture.addListener(
             {
                 // CameraProvider
@@ -162,37 +153,34 @@ class TranslateFragment : Fragment(),
     private fun bindCameraUseCases() {
 
         // CameraProvider
-        val cameraProvider = cameraProvider
-            ?: throw IllegalStateException("Camera initialization failed.")
+        val cameraProvider = cameraProvider ?: throw IllegalStateException("Camera initialization failed.")
 
-        val cameraSelector =
-            CameraSelector.Builder().requireLensFacing(cameraFacing).build()
+        val cameraSelector = CameraSelector.Builder().requireLensFacing(cameraFacing).build()
 
         // Preview. Only using the 4:3 ratio because this is the closest to our models
-        preview = Preview.Builder().setTargetAspectRatio(AspectRatio.RATIO_4_3)
+        preview = Preview.Builder()
+            .setTargetAspectRatio(AspectRatio.RATIO_4_3)
             .setTargetRotation(fragmentTranslateBinding.viewFinder.display.rotation)
             .build()
 
         // ImageAnalysis. Using RGBA 8888 to match how our models work
-        imageAnalyzer =
-            ImageAnalysis.Builder().setTargetAspectRatio(AspectRatio.RATIO_4_3)
-                .setTargetRotation(fragmentTranslateBinding.viewFinder.display.rotation)
-                .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
-                .setOutputImageFormat(ImageAnalysis.OUTPUT_IMAGE_FORMAT_RGBA_8888)
-                .build()
-                // The analyzer can then be assigned to the instance
-                .also {
-                    it.setAnalyzer(backgroundExecutor) { image ->
-                        recognizeHand(image)
-                    }
+        imageAnalyzer = ImageAnalysis.Builder()
+            .setTargetAspectRatio(AspectRatio.RATIO_4_3)
+            .setTargetRotation(fragmentTranslateBinding.viewFinder.display.rotation)
+            .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
+            .setOutputImageFormat(ImageAnalysis.OUTPUT_IMAGE_FORMAT_RGBA_8888)
+            .build()
+            .also {
+                it.setAnalyzer(backgroundExecutor) { image ->
+                    recognizeHand(image)
                 }
+            }
 
         // Must unbind the use-cases before rebinding them
         cameraProvider.unbindAll()
 
         try {
-            // A variable number of use-cases can be passed here -
-            // camera provides access to CameraControl & CameraInfo
+            // A variable number of use-cases can be passed here - camera provides access to CameraControl & CameraInfo
             camera = cameraProvider.bindToLifecycle(
                 this, cameraSelector, preview, imageAnalyzer
             )
@@ -204,25 +192,28 @@ class TranslateFragment : Fragment(),
         }
     }
 
+    private fun toggleCamera() {
+        cameraFacing = if (cameraFacing == CameraSelector.LENS_FACING_FRONT) {
+            CameraSelector.LENS_FACING_BACK
+        } else {
+            CameraSelector.LENS_FACING_FRONT
+        }
+        // Rebind the camera use cases with the new camera lens facing
+        bindCameraUseCases()
+    }
+
     private fun recognizeHand(imageProxy: ImageProxy) {
-        gestureRecognizerHelper.recognizeLiveStream(
-            imageProxy = imageProxy,
-        )
+        val mirroredImage = cameraFacing == CameraSelector.LENS_FACING_FRONT
+        gestureRecognizerHelper.recognizeLiveStream(imageProxy, mirroredImage)
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
-        imageAnalyzer?.targetRotation =
-            fragmentTranslateBinding.viewFinder.display.rotation
+        imageAnalyzer?.targetRotation = fragmentTranslateBinding.viewFinder.display.rotation
     }
 
-    // Update UI after a hand gesture has been recognized. Extracts original
-    // image height/width to scale and place the landmarks properly through
-    // OverlayView. Only one result is expected at a time. If two or more
-    // hands are seen in the camera frame, only one will be processed.
-    override fun onResults(
-        resultBundle: GestureRecognizerHelper.ResultBundle
-    ) {
+    // Update UI after a hand gesture has been recognized. Extracts original image height/width to scale and place the landmarks properly through OverlayView. Only one result is expected at a time. If two or more hands are seen in the camera frame, only one will be processed.
+    override fun onResults(resultBundle: GestureRecognizerHelper.ResultBundle) {
         activity?.runOnUiThread {
             if (_fragmentTranslateBinding != null) {
                 // Show result of recognized gesture
@@ -240,7 +231,7 @@ class TranslateFragment : Fragment(),
                     resultBundle.results.first(),
                     resultBundle.inputImageHeight,
                     resultBundle.inputImageWidth,
-                    RunningMode.LIVE_STREAM
+                    RunningMode.LIVE_STREAM,
                 )
 
                 // Force a redraw

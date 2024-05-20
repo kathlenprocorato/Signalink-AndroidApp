@@ -1,7 +1,8 @@
-package com.example.signalinkversiontwo
+package com.example.signalinkversiontwo.learnactivity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.example.signalinkversiontwo.R
 
 class LettersActivity : AppCompatActivity() {
 
