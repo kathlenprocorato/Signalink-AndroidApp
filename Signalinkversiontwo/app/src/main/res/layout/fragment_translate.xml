@@ -36,4 +36,11 @@
         app:layout_anchor="@id/recyclerview_results"
         app:layout_anchorGravity="bottom" />
 
+    <ImageButton
+        android:id="@+id/btn_toggle_camera"
+        android:layout_width="56dp"
+        android:layout_height="48dp"
+        android:src="@drawable/switchcamera"
+        android:contentDescription="camera toggle" />
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
