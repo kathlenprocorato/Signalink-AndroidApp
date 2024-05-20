@@ -95,7 +95,7 @@ class GestureRecognizerResultsAdapter(private val context: Context) :
                     words.add("")
                 }
 
-                if ((words.last() != label && label != null && score.toString().toDouble() >= 0.90)) {
+                if ((words.last() != label && label != null && score.toString().toDouble() >= 0.95)) {
                     words.add(label)
                     if (label.equals("Space", true)) {
                         sentence += " "
@@ -112,9 +112,10 @@ class GestureRecognizerResultsAdapter(private val context: Context) :
 
                 tvLabel.text = sentence
 
-                //subject to change cause it looops
-                if (tts != null && !tts!!.isSpeaking) {
-                    tts?.speak(sentence, TextToSpeech.QUEUE_FLUSH, null, null)
+                if(label.equals("Space")){
+                    if (tts != null && !tts!!.isSpeaking) {
+                        tts?.speak(sentence, TextToSpeech.QUEUE_FLUSH, null, null)
+                    }
                 }
             }
         }
