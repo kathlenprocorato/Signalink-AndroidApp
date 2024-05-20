@@ -96,7 +96,11 @@ class PhrasesRecognizerResultsAdapter(private val context: Context) :
                 }
 
                 if ((words.last() != label && label != null && score.toString().toDouble() >= 0.70)) {
-                    words.add(label)
+                    if (label.equals("Delete", ignoreCase = true)){
+                        words.removeLast()
+                    } else {
+                        words.add(label)
+                    }
                 }
                 sentence = words.joinToString(separator = " ") { it ?: "" }
                 tvLabel.text = sentence
