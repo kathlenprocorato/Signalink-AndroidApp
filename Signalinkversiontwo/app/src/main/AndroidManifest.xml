@@ -29,6 +29,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".learnactivity.LettersActivity"/>
+        <activity android:name=".learnactivity.SimplePhrasesActivity"/>
         <activity android:name=".learnactivity.QuizActivity"/>
     </application>
 
